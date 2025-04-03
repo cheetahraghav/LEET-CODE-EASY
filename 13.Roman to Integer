@@ -1,0 +1,22 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman_to_int = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        numbers = []
+        roman_value_list = list(roman_to_int.values())
+        for romanletter in s:
+            numbers.append(roman_to_int[romanletter])
+        current_index = 0
+        previous_index = 0
+        value = []
+        numbers.reverse()
+        for digits in numbers:
+            previous_index=current_index
+            current_index = roman_value_list.index(digits)
+            if current_index < previous_index:
+                value.pop()
+                value.append(roman_value_list[previous_index]-roman_value_list[current_index])
+            else:
+                a=roman_value_list[current_index]
+                value.append(a)
+        return sum(value)
+
